@@ -4,12 +4,8 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
 
-const CustomEditor: FC<any> = ({ setFormData }) => {
-  const [initData, setInitData] = useState({
-    topicTitle: "eeffsdda",
-    topicTag: ['???', '!!!'],
-    textValue: "<p>11111 eewcw</p><p><br></p><p>dwdwecewce</p><p><br></p><p><img src=\"https://info-share.oss-cn-beijing.aliyuncs.com/topImg/ygj111-4042451259310150420-avataaars (2).png\">wqw</p><p>wqdqwdqwdqw</p><p>dwqdwqdqw</p><p><br></p>",
-  });
+const CustomEditor: FC<any> = ({ setFormData, formData }) => {
+  const [initData, setInitData] = useState(JSON.parse(formData.body));
   useEffect(() => {
     setFormData({
       type: "custom",
@@ -41,7 +37,7 @@ const CustomEditor: FC<any> = ({ setFormData }) => {
           <Select mode="tags"
             style={{ width: '100%' }}
             placeholder=""
-            defaultValue={initData.topicTag}
+            defaultValue={initData?.topicTag}
             onChange={(val) => {
               setInitData({ ...initData, topicTag: val })
             }} />,

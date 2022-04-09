@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { PageContainer, RouteContext } from '@ant-design/pro-layout';
+import { PageContainer } from '@ant-design/pro-layout';
 import { Card, message } from 'antd';
-import { ProFormInstance, ProFormSwitch } from '@ant-design/pro-form';
+import type { ProFormInstance } from '@ant-design/pro-form';
+import { ProFormSwitch } from '@ant-design/pro-form';
 import { ProFormSelect } from '@ant-design/pro-form';
 import { ProFormText, ProFormTextArea, StepsForm } from '@ant-design/pro-form';
 

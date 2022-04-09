@@ -11,23 +11,10 @@ const uploadButton = (
     <div style={{ marginTop: 8 }}>Upload</div>
   </div>
 );
-const TemEditor: FC<any> = ({ setFormData }) => {
+const TemEditor: FC<any> = ({ setFormData, formData }) => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState<SetStateAction<string>>('');
-  const [initData, setInitData] = useState({
-    topicTitle: "1232131",
-    topicTag: ['1', '2'],
-    topicText: "esdsdsa",
-    topicImgList: [
-      {
-        // uid: '-4',
-        // name: 'image.png',
-        // status: 'done',
-        url: 'https://info-share.oss-cn-beijing.aliyuncs.com/topImg/ygj111-4928730523314232733-20220211-154528.jpeg',
-      },
-      { url: 'https://info-share.oss-cn-beijing.aliyuncs.com/topImg/ygj111-796402879280463422-avataaars (1).png' }
-    ],
-  });
+  const [initData, setInitData] = useState(JSON.parse(formData.body));
   useEffect(() => {
     setFormData({
       type: "template",
@@ -43,9 +30,9 @@ const TemEditor: FC<any> = ({ setFormData }) => {
       }
       const url = info.fileList[info.fileList.length - 1].response.data;
       setInitData({
-        ...initData, topicImgList: initData.topicImgList.concat(...info.fileList.map((item: any) => {
+        ...initData, topicImgList: initData?.topicImgList?.concat(...info.fileList.map((item: any) => {
           return { url: item?.response?.data }
-        })).filter(item => !!Object.keys(item).length && !!item.url)
+        }))?.filter((item: { url?: any; }) => !!Object.keys(item).length && !!item.url)
       });
       console.log("url", url)
     }
@@ -68,13 +55,13 @@ const TemEditor: FC<any> = ({ setFormData }) => {
           label="标题"
           name="topicTitle"
         >
-          <Input style={{ width: '100%' }} defaultValue={initData.topicTitle} />
+          <Input style={{ width: '100%' }} defaultValue={initData?.topicTitle} />
         </Form.Item>
         <Form.Item
           label="文字内容"
           name="topicText"
         >
-          <TextArea rows={4} placeholder="" maxLength={Infinity} defaultValue={initData.topicText} />
+          <TextArea rows={4} placeholder="" maxLength={Infinity} defaultValue={initData?.topicText} />
         </Form.Item>
         <Form.Item
           label="图片内容"
@@ -87,7 +74,7 @@ const TemEditor: FC<any> = ({ setFormData }) => {
               "token": localStorage.getItem("token") as any
             }}
             listType="picture-card"
-            defaultFileList={initData.topicImgList as unknown as UploadFile<{ url: string }>[]}
+            defaultFileList={initData?.topicImgList as unknown as UploadFile<{ url: string }>[]}
             onPreview={(file: UploadFile) => {
               setPreviewVisible(true);
               console.log("file", file)
@@ -97,11 +84,11 @@ const TemEditor: FC<any> = ({ setFormData }) => {
             onRemove={(v: UploadFile) => {
               console.log("remove", v)
               setInitData({
-                ...initData, topicImgList: initData.topicImgList.filter((item: any) => item.url !== v?.response?.data)
+                ...initData, topicImgList: initData?.topicImgList?.filter((item: any) => item.url !== v?.response?.data)
               });
             }}
           >
-            {initData.topicImgList.length >= 99999 ? null : uploadButton}
+            {initData?.topicImgList?.length >= 99999 ? null : uploadButton}
           </Upload>
           <Modal
             visible={previewVisible}
@@ -119,7 +106,7 @@ const TemEditor: FC<any> = ({ setFormData }) => {
           <Select mode="tags"
             style={{ width: '100%' }}
             placeholder=""
-            defaultValue={initData.topicTag}
+            defaultValue={initData?.topicTag}
             onChange={(val) => {
               setInitData({ ...initData, topicTag: val })
             }}

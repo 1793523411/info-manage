@@ -24,7 +24,8 @@ const myUrl = [
   "/api/v1/get_video_list",
   "/api/v1/search_video_list",
   "/api/v1/update_video_list",
-  "/api/v1/delete_video_record"
+  "/api/v1/delete_video_record",
+  "/api/v1/create_topic_record"
 ]
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
