@@ -1,0 +1,29 @@
+.contain {
+  display: flex;
+  flex-wrap: wrap;
+}
+.hid-img {
+  position: relative;
+  margin: 23px;
+  :global {
+    .ant-btn-icon-only.ant-btn-sm {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  .hid-img-btn {
+    position: absolute;
+    right: -15px;
+    top: 0;
+    z-index: 1;
+  }
+}
+.show-img {
+  margin: 2px;
+  border: 1px solid #188fff00;
+  cursor: pointer;
+}
+.show-img-active {
+  border: 1px solid #1890ff;
+  box-shadow: 0px 0px 3px 0px #18eff7;
+}
