@@ -79,8 +79,12 @@
         component: './Create/VideoList',
       },
       {
+        path: '/create/topic-editor/:rid',
+        icon: 'table',
+        component: './Create/TopicEditor',
+      },
+      {
         path: '/create/topic-editor',
-        name: '话题编辑',
         icon: 'table',
         component: './Create/TopicEditor',
       },

@@ -86,6 +86,36 @@ export async function createTopicRecord(body: any, options?: { [key: string]: an
   });
 }
 
+export async function getTopicRecord(body: any, options?: { [key: string]: any }) {
+  return request<Record<string, any>>('/api/v1/get_topic_list', {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}
+
+export async function getTopicRecordById(options?: { [key: string]: any }) {
+  return request<Record<string, any>>('/api/v1/search_topic_list', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
+export async function updateTopicRecord(body: any, options?: { [key: string]: any }) {
+  return request<Record<string, any>>('/api/v1/update_topic_list', {
+    method: 'POST',
+    data: body,
+    ...(options || {}),
+  });
+}
+
+export async function delTopRecordById(options?: { [key: string]: any }) {
+  return request<Record<string, any>>('/api/v1/delete_topic_record', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
 /** 退出登录接口 POST /api/login/outLogin */
 export async function outLogin(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/login/outLogin', {

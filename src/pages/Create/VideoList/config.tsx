@@ -1,6 +1,6 @@
-import { message, Tag, Tooltip, Modal } from 'antd';
+import { message, Tag, Modal } from 'antd';
 import type { ProColumns } from '@ant-design/pro-table';
-import { ExclamationCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import Player from 'xgplayer/dist/simple_player';
 import volume from 'xgplayer/dist/controls/volume';
 import type { FC } from 'react';
@@ -145,9 +145,6 @@ export const columns: ProColumns<TableListItem>[] = [
     title: (
       <>
         创建时间
-        <Tooltip placement="top" title="这是一段描述">
-          <QuestionCircleOutlined style={{ marginLeft: 4 }} />
-        </Tooltip>
       </>
     ),
     width: 140,

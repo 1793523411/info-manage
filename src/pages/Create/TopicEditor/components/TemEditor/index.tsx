@@ -29,12 +29,11 @@ const TemEditor: FC<any> = ({ setFormData, formData }) => {
         return;
       }
       const url = info.fileList[info.fileList.length - 1].response.data;
+      const initList = initData?.topicImgList?.length ? initData?.topicImgList : []
       setInitData({
-        ...initData, topicImgList: initData?.topicImgList?.concat(...info.fileList.map((item: any) => {
-          return { url: item?.response?.data }
-        }))?.filter((item: { url?: any; }) => !!Object.keys(item).length && !!item.url)
+        ...initData, topicImgList: initList?.concat(...[{ url: info.fileList[info.fileList.length - 1]?.response?.data, uid: info.fileList[info.fileList.length - 1]?.uid }])?.filter((item: { url?: any; }) => !!Object.keys(item).length && !!item.url)
       });
-      console.log("url", url)
+      console.log("url", url, info.fileList, initList)
     }
   }
   return (
@@ -46,22 +45,23 @@ const TemEditor: FC<any> = ({ setFormData, formData }) => {
         initialValues={{}}
         onFinish={() => { }}
         onFinishFailed={() => { }}
-        onValuesChange={(val) => {
-          setInitData({ ...initData, topicTitle: val.topicTitle })
-        }}
         autoComplete="off"
       >
         <Form.Item
           label="标题"
           name="topicTitle"
         >
-          <Input style={{ width: '100%' }} defaultValue={initData?.topicTitle} />
+          <Input style={{ width: '100%' }} defaultValue={initData?.topicTitle} onChange={(val) => {
+            setInitData({ ...initData, topicTitle: val.target.value })
+          }} />
         </Form.Item>
         <Form.Item
           label="文字内容"
           name="topicText"
         >
-          <TextArea rows={4} placeholder="" maxLength={Infinity} defaultValue={initData?.topicText} />
+          <TextArea rows={4} placeholder="" maxLength={Infinity} defaultValue={initData?.topicText} onChange={(val) => {
+            setInitData({ ...initData, topicText: val.target.value })
+          }} />
         </Form.Item>
         <Form.Item
           label="图片内容"
@@ -83,8 +83,9 @@ const TemEditor: FC<any> = ({ setFormData, formData }) => {
             onChange={handleChange}
             onRemove={(v: UploadFile) => {
               console.log("remove", v)
+              const target = v?.response?.data || v?.url
               setInitData({
-                ...initData, topicImgList: initData?.topicImgList?.filter((item: any) => item.url !== v?.response?.data)
+                ...initData, topicImgList: initData?.topicImgList?.filter((item: any) => item.url !== target)
               });
             }}
           >
@@ -113,7 +114,7 @@ const TemEditor: FC<any> = ({ setFormData, formData }) => {
           />,
         </Form.Item>
       </Form>
-    </div>
+    </div >
   );
 }
 
