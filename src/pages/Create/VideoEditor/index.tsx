@@ -96,7 +96,6 @@ function VideoEditor() {
           formMapRef={formMapRef}
           onFinish={async (values) => {
             console.log(values);
-            debugger;
             const reqData = {
               "user_name": currentUser?.username,
               "vdesc": values.videoBase.vdesc,
