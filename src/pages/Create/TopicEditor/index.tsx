@@ -76,7 +76,7 @@ function TopicEditor() {
     <PageContainer
       content=""
       header={{
-        title: "编辑话题"
+        title: "文章话题"
       }}
     >
       <Card>

@@ -70,7 +70,7 @@ export default () => {
       placeholder="站内搜索"
       defaultValue="umi ui"
       options={[
-        { label: 'Ant Design Pro', value: 'Ant Design Pro' },
+        { label: '管理系统', value: '管理系统' },
         {
           label: 'Ant Design',
           value: 'Ant Design',

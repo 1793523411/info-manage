@@ -60,7 +60,7 @@ export const columns: ProColumns<TableListItem>[] = [
     render: (_) => <div>{_}</div>,
   },
   {
-    title: '话题名称',
+    title: '文章名称',
     align: 'center',
     width: 180,
     ellipsis: true,
@@ -68,7 +68,7 @@ export const columns: ProColumns<TableListItem>[] = [
     render: (_) => <div>{_}</div>,
   },
   {
-    title: '话题类型',
+    title: '文章类型',
     align: 'center',
     width: 180,
     ellipsis: true,

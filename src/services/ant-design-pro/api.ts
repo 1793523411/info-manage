@@ -135,6 +135,18 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
     ...(options || {}),
   });
 }
+/** 登录接口 POST /api/login/account */
+
+export async function registy(body: API.LoginParams, options?: { [key: string]: any }) {
+  return request<API.LoginResult>('/user/registy', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
 
 /** 此处后端没有提供注释 GET /api/notices */
 export async function getNotices(options?: { [key: string]: any }) {

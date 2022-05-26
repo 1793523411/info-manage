@@ -2,11 +2,11 @@
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { SettingDrawer } from '@ant-design/pro-layout';
 import type { RunTimeLayoutConfig, RequestConfig } from 'umi';
-import { history, Link } from 'umi';
+import { history } from 'umi';
 import RightContent from '@/components/RightContent';
 // import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
+// import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { getLocalStroage } from '@/utils/local-stroage'
 import MyLoading from '@/components/MyLoading';
@@ -16,6 +16,7 @@ const loginPath = '/user/login';
 
 const myUrl = [
   "/user/login",
+  "/user/registy",
   "/api/v1/search_user_info",
   "/api/v1/save_user_info",
   "/api/v1/avator_get",
@@ -128,14 +129,14 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     links: isDev
       ? [
-        <Link to="/umi/plugin/openapi" target="_blank">
-          <LinkOutlined />
-          <span>OpenAPI 文档</span>
-        </Link>,
-        <Link to="/~docs">
-          <BookOutlined />
-          <span>业务组件文档</span>
-        </Link>,
+        // <Link to="/umi/plugin/openapi" target="_blank">
+        //   <LinkOutlined />
+        //   <span>OpenAPI 文档</span>
+        // </Link>,
+        // <Link to="/~docs">
+        //   <BookOutlined />
+        //   <span>业务组件文档</span>
+        // </Link>,
       ]
       : [],
     menuHeaderRender: undefined,

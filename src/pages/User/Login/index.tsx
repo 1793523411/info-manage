@@ -3,11 +3,11 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { message } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
 import { useIntl, history, FormattedMessage, SelectLang, useModel } from 'umi';
 import Footer from '@/components/Footer';
-import { login } from '@/services/ant-design-pro/api';
+import { login, registy } from '@/services/ant-design-pro/api';
 import { setLocalStroage } from '@/utils/local-stroage'
 
 import styles from './index.less';
@@ -47,11 +47,19 @@ const Login: React.FC = () => {
         history.push(redirect || '/');
         return;
       } else {
-        const defaultLoginSuccessMessage = intl.formatMessage({
-          id: msg.msg,
-          defaultMessage: msg.msg,
-        });
-        message.error(defaultLoginSuccessMessage);
+        if (msg.msg === '用户不存在') {
+          const msg2 = await registy({ ...values });
+          if (msg2.code === 0) {
+            message.success('用户未注册，已成功注册！');
+            await handleSubmit({ ...values });
+          }
+        } else {
+          const defaultLoginSuccessMessage = intl.formatMessage({
+            id: msg.msg,
+            defaultMessage: msg.msg,
+          });
+          message.error(defaultLoginSuccessMessage);
+        }
       }
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
@@ -62,6 +70,8 @@ const Login: React.FC = () => {
     }
   };
 
+  const [isLogin, setIsLogin] = useState<boolean>(true);
+
   return (
     <div className={styles.container}>
       <div className={styles.lang} data-lang>
@@ -69,8 +79,8 @@ const Login: React.FC = () => {
       </div>
       <div className={styles.content}>
         <LoginForm
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="Ant Design"
+          // logo={<img alt="logo" src="/logo.svg" />}
+          title="管理后台"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
             autoLogin: true,
@@ -135,8 +145,9 @@ const Login: React.FC = () => {
               style={{
                 float: 'right',
               }}
+              onClick={() => setIsLogin(false)}
             >
-              <FormattedMessage id="pages.login.forgotPassword" defaultMessage="忘记密码" />
+              <FormattedMessage id="pages.login.registerAccount" defaultMessage="注册" />
             </a>
           </div>
         </LoginForm>

@@ -19,12 +19,6 @@
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
-  },
-  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
@@ -90,7 +84,7 @@
       },
       {
         path: '/create/topic-list',
-        name: '话题列表',
+        name: '文章列表',
         icon: 'table',
         component: './Create/TopicList',
       },
@@ -128,7 +122,7 @@
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/user-info',
   },
   {
     component: './404',
